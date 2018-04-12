@@ -71,7 +71,7 @@ class preProcess:
             cleanSentence = self.stopWordRemoval(doc, stopWords)
             stemmedSentence = self.wordStemming(cleanSentence)
             stemmedList.append(stemmedSentence)
-            score.append(document[1])
+            score.append(int(document[1]))
 
         return stemmedList,score
 
