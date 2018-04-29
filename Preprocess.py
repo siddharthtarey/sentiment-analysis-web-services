@@ -7,6 +7,8 @@ import nltk
 import string
 
 class preProcess:
+
+    # remove certain stop words from the dictionary.
     def stopWordGenerate(self):
         # get stopwords from nltk corpus
         s = set(stopwords.words("english"))
@@ -26,6 +28,7 @@ class preProcess:
 
         return s
 
+    # remove stop words from the docuument
     def stopWordRemoval(self,document,stopWords):
         wordTokens = word_tokenize(document)
         sentence = []
@@ -35,6 +38,7 @@ class preProcess:
                 sentence.append(w)
         return sentence
 
+    # performs word stemming for every document
     def wordStemming(self,sentence):
         porter = PorterStemmer()
         stemmedStentence = ""
@@ -43,6 +47,7 @@ class preProcess:
 
         return stemmedStentence.strip()
 
+    # generate bigrams.
     def generateBigrams(self,document):
 
         bigrams = list(nltk.bigrams(document))
@@ -62,9 +67,11 @@ class preProcess:
     def main(self):
         print("Preprocess begin")
         stopWords = self.stopWordGenerate()
-        data = self.extractFromCsv("Data_sample_1.csv")
+        # filename from which data is to be extracted.
+        data = self.extractFromCsv("data_balanced.csv")
         stemmedList = []
         score = []
+        # iterate through every document in the corpus.
         for document in data:
             doc = document[0].lower()
             doc = doc.translate(str.maketrans('','',string.punctuation))
