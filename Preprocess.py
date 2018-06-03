@@ -1,6 +1,7 @@
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+from nltk.corpus import twitter_samples
 
 import csv
 import nltk
@@ -67,8 +68,11 @@ class preProcess:
     def main(self):
         print("Preprocess begin")
         stopWords = self.stopWordGenerate()
-        # filename from which data is to be extracted.
-        data = self.extractFromCsv("data_balanced.csv")
+
+        data1 = twitter_samples.strings('negative_tweets.json')
+        data2 = twitter_samples.strings('positive_tweets.json')
+        data = data1+data2
+
         stemmedList = []
         score = []
         # iterate through every document in the corpus.
